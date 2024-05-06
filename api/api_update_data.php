@@ -1,18 +1,23 @@
 <?php
+
+
+
 header("Access-Control-Allow-Methods: PUT,PATCH");
 header("Content-Type: application/json");
+
+
 
 include "../config/config.php";
 
 $config = new Config();
 
-if ($_SERVER['REQUEST_METHOD'] == 'PUT'||$_SERVER['REQUEST_METHOD'] == 'PATCH') 
+ $arr = NULL;
+
+if ($_SERVER['REQUEST_METHOD']=='PUT'||$_SERVER['REQUEST_METHOD'] == 'PATCH') 
 {
 
     $input = file_get_contents('php://input'); // return string
     parse_str($input, $_UPDATE);
-
-
 
     $name = $_UPDATE['name'];
     $author = $_UPDATE['author'];
@@ -32,5 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT'||$_SERVER['REQUEST_METHOD'] == 'PATCH')
 } else {
     $arr['err'] = "Only PUT and PATCH HTTP request methods are allowed...";
 }
+    
 echo json_encode($arr);
+
+
 ?>

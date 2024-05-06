@@ -76,5 +76,25 @@ class Config
             return false;
         }
     }
+
+    public function signUpUser($name,$username,$password){
+
+        $this->connect();
+ 
+        $hash_pass = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = "INSERT INTO user(name,username,password) values('$name', '$username', '$hash_pass');";
+        
+        return mysqli_query($this->con,$query);
+
+    } 
+
+    public funtion signInUser($name,$password){
+        $this->connect();
+
+        $query = "SELECT * FROM user WHERE name=$name;";
+
+    }
+
 }
 ?>
